@@ -13,5 +13,4 @@ bot = commands.Bot(command_prefix = 'b!', case_insensitive = True, activity=disc
 async def on_ready():
   print('{0.user} is online.' . format(bot))
 
-
 bot.run(bot_key)
