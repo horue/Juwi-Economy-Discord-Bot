@@ -33,8 +33,9 @@ async def helpbank(ctx):
   await ctx.send('Help for economy commands goes here.')
 
 @bot.command()
-async def bank(ctx):
-  await ctx.sendo('-')
+async def bankid(ctx):
+  id = ctx.message.guild.id
+  await ctx.send(id)
 
 
 bot.run(bot_key)
