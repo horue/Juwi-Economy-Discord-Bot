@@ -38,4 +38,13 @@ async def bankid(ctx):
   await ctx.send(id)
 
 
+@bot.command()
+async def wallet(ctx):
+  id_s = ctx.message.guild.id
+  id_u = ctx.message.author.id
+  cursor.execute(f"CREATE TABLE IF NOT EXISTS {str(id_s)} (UID INTERGER, Bank INTERGER, Wallter INTERGER)")
+  await ctx.send('Wallter created.')
+
+
+
 bot.run(bot_key)
