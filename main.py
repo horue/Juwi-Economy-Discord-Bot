@@ -40,14 +40,20 @@ async def bankid(ctx):
 
 @bot.command()
 async def wallet(ctx):
+  server = ctx.message.guild.id
+  user = ctx.message.author.id
+  server = str(server)
   try:
-    id_s = ctx.message.guild.id
-    id_u = ctx.message.author.id
-    cursor.execute(f"CREATE TABLE IF NOT EXISTS {id_s} (UID INTERGER, Bank INTERGER, Wallet INTERGER)")
-    cursor.execute(f"INSERT INTO {id_s} VALUES ('{id_u}', 0, 0)")
-    await ctx.send('Wallet created.')
-  except:
-    await ctx.send('Error.')
+    cursor.execute(f"""CREATE TABLE IF NOT EXISTS "{server}" (UID BIGINT, Bank INTERGER, Wallet INTERGER)""")
+    cursor.execute(f"""SELECT * FROM "{server}" WHERE UID = '{user}'""")
+    r = cursor.fetchone()
+    if not r:
+      cursor.execute(f"""INSERT INTO "{server}" VALUES ('{user}', '0', '0')""")
+      await ctx.send('Wallet created.')
+    else:
+      await ctx.send('Wallet already exists.')
+  except sqlite3.Error as e:
+    await ctx.send(f'Error. {e}')
 
 
 
