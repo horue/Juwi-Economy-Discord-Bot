@@ -38,7 +38,7 @@ async def bankid(ctx):
   await ctx.send(id)
 
 
-@bot.command()
+@bot.command(aliases=['w'])
 async def wallet(ctx):
   server = ctx.message.guild.id
   user = ctx.message.author.id
