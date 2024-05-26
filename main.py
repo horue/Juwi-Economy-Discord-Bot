@@ -57,7 +57,7 @@ async def wallet(ctx):
       cursor.execute(f"""SELECT Bank FROM "{server}" WHERE UID = {user}""")
       b=cursor.fetchone()
       connection.commit()
-      await ctx.send(f'Wallet: {w[0]} e Bank: {b[0]}')
+      await ctx.send(f'Wallet: ${w[0]}\nBank: ${b[0]}')
   except sqlite3.Error as e:
     await ctx.send(f'Error. {e}')
 
