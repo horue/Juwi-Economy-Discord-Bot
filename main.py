@@ -49,13 +49,15 @@ async def wallet(ctx):
     r = cursor.fetchone()
     if not r:
       cursor.execute(f"""INSERT INTO "{server}" VALUES ('{user}', '0', '0')""")
+      connection.commit()
       await ctx.send('Wallet created.')
     else:
       cursor.execute(f"""SELECT Wallet FROM "{server}" WHERE UID = {user}""")
-      w=cursor.fetchall()
+      w=cursor.fetchone()
       cursor.execute(f"""SELECT Bank FROM "{server}" WHERE UID = {user}""")
-      b=cursor.fetchall()
-      await ctx.send(f'Wallet:{w} e Bank:{b}')
+      b=cursor.fetchone()
+      connection.commit()
+      await ctx.send(f'Wallet: {w[0]} e Bank: {b[0]}')
   except sqlite3.Error as e:
     await ctx.send(f'Error. {e}')
 
