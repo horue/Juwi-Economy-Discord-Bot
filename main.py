@@ -62,5 +62,22 @@ async def wallet(ctx):
     await ctx.send(f'Error. {e}')
 
 
+@bot.command()
+async def add(ctx, value):
+  value = value
+  author = ctx.message.author
+  server = ctx.message.guild.id
+  user = ctx.message.author.id
+  server = str(server)
+  try:
+      cursor.execute(f"""SELECT * FROM "{server}" WHERE UID = '{user}'""")
+      r = cursor.fetchone()
+      if not r:
+        await ctx.send(f"Invalid. {author} does not have a wallet yet.")
+  except:
+    ctx.send('Error.')
+  await ctx.send(f"{value} added to {author}'s account.")
+
+
 
 bot.run(bot_key)
