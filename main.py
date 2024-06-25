@@ -39,7 +39,7 @@ async def bankid(ctx):
 
 
 @bot.command(aliases=['w'])
-async def wallet(ctx, user):
+async def wallet(ctx, user=""):
   server = ctx.message.guild.id
   if user == '':
     user = ctx.message.author.id
