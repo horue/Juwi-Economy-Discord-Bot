@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import sqlite3
 import requests
+import re
 from key import bot_key
 
 ## Bot Configurations ##
@@ -43,6 +44,9 @@ async def wallet(ctx, user=""):
   server = ctx.message.guild.id
   if user == '':
     user = ctx.message.author.id
+  else:
+    id = re.search(r'<(@\d+)>', user)
+    user = id.group()
   server = str(server)
   try:
     cursor.execute(f"""CREATE TABLE IF NOT EXISTS "{server}" (UID BIGINT, Bank INTERGER, Wallet INTERGER)""")
