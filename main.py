@@ -39,9 +39,10 @@ async def bankid(ctx):
 
 
 @bot.command(aliases=['w'])
-async def wallet(ctx):
+async def wallet(ctx, user):
   server = ctx.message.guild.id
-  user = ctx.message.author.id
+  if user == '':
+    user = ctx.message.author.id
   server = str(server)
   try:
     cursor.execute(f"""CREATE TABLE IF NOT EXISTS "{server}" (UID BIGINT, Bank INTERGER, Wallet INTERGER)""")
@@ -63,7 +64,7 @@ async def wallet(ctx):
 
 
 @bot.command()
-async def add(ctx, value):
+async def add(ctx,user, value):
   value = value
   author = ctx.message.author
   server = ctx.message.guild.id
