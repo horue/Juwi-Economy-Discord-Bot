@@ -80,9 +80,13 @@ async def add(ctx,user, value):
       r = cursor.fetchone()
       if not r:
         await ctx.send(f"Invalid. {author} does not have a wallet yet.")
-  except:
-    ctx.send('Error.')
-  await ctx.send(f"{value} added to {author}'s account.")
+      elif r:
+        cursor.execute(f"""UPDATE "{server}" SET Wallet = Wallet + {value} WHERE UID = '{user}'""")
+        connection.commit()
+        await ctx.send(f"{value} added to {user}'s account.")
+  except sqlite3.Error as e:
+    await ctx.send(f'Error: {e}')
+
 
 
 
