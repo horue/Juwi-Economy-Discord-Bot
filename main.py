@@ -88,6 +88,21 @@ async def add(ctx,user, value):
     await ctx.send(f'Error: {e}')
 
 
+@bot.command()
+async def take(ctx, user, value):
+  value = value
+  author = ctx.message.author
+  server = ctx.message.guild.id
+  user = ctx.message.author.id
+  server = str(server)
+  try:
+    if author != user:
+      await ctx.send("You can't use someone else's bank account.")
+  except:
+    await ctx.send('Error.')
+
+
+
 
 
 bot.run(bot_key)
