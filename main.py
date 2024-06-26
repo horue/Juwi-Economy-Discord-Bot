@@ -45,8 +45,9 @@ async def wallet(ctx, user=""):
   if user == '':
     user = ctx.message.author.id
   else:
-    id = re.search(r'<(@\d+)>', user)
-    user = id.group()
+    id = re.search(r'<@(\d+)>', user)
+    user = id.group(1)
+    print(user)
   server = str(server)
   try:
     cursor.execute(f"""CREATE TABLE IF NOT EXISTS "{server}" (UID BIGINT, Bank INTERGER, Wallet INTERGER)""")
