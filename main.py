@@ -73,7 +73,8 @@ async def add(ctx,user, value):
   value = value
   author = ctx.message.author
   server = ctx.message.guild.id
-  user = ctx.message.author.id
+  if user == '':
+    user = ctx.message.author.id
   server = str(server)
   try:
       cursor.execute(f"""SELECT * FROM "{server}" WHERE UID = '{user}'""")
