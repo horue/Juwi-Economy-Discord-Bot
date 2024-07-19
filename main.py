@@ -68,7 +68,7 @@ async def wallet(ctx, user=""):
     await ctx.send(f'Error. {e}')
 
 
-@bot.command()
+@bot.command(aliases=['a'])
 async def add(ctx,user, value):
   value = value
   author = ctx.message.author
