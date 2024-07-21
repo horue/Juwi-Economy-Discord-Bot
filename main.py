@@ -30,7 +30,9 @@ async def on_ready():
 
 
 @bot.command()
-async def helpbank(ctx):
+async def helpbank(ctx, a=''):
+  if a == '':
+    await ctx.send('Please, say the command you need help.')
   await ctx.send('Help for economy commands goes here.')
 
 @bot.command(aliases=['id'])
